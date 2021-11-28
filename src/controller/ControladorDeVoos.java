@@ -12,6 +12,7 @@ import Exceptions.NotPassException;
 import Exceptions.NotPathException;
 import Exceptions.NotVerticeException;
 import Exceptions.NotVooException;
+import java.util.Iterator;
 import model.Companhia;
 import util.Semaforo;
 
@@ -35,6 +36,15 @@ public class ControladorDeVoos {
         Aeroporto aeroporto = new Aeroporto(nome);
         grafo.addVertice(aeroporto);
         return aeroporto;
+    }
+    
+    public Aeroporto getAeroporto(String nome) throws NotVerticeException{
+        for (Aeroporto aeroporto : grafo.vertices()) {
+            if(aeroporto.getNome().equals(nome)){
+                return aeroporto;
+            }
+        }
+        return null;
     }
     
     public ArrayList<Voo> getVoos(Aeroporto a1, Aeroporto a2) throws NotVerticeException, NotVooException{

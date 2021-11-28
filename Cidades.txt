@@ -1,0 +1,17 @@
+16
+Salvador
+Sao_Luis
+Sao_Paulo
+Curitiba
+Florianopolis
+Maceio
+Joao_Pessoa
+Brasilia
+Vitoria
+Fortaleza
+Goiania
+Manaus
+Recife
+Belo_Horizonte
+Porto_Alegre
+Rio_de_Janeiro

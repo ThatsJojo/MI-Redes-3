@@ -1,0 +1,27 @@
+Azul
+Salvador
+Sao_Luis 2 400 100 Sao_Paulo 2 300 100 Curitiba 3 200 100 Florianopolis 4 220 100 Maceio 1 20 90
+Sao_Luis
+Sao_Paulo 3 250 200 Curitiba 5 70 245 Florianopolis 6 300 100 Maceio 4 200 100
+Sao_Paulo
+Curitiba 1 200 100 Florianopolis 1 200 100 Maceio 3 200 100
+Curitiba
+Florianopolis 3 200 100 Maceio 5 200 100
+Florianopolis
+Maceio 5 200 100
+Joao_Pessoa
+Brasilia 3 200 100 Vitoria 4 200 100 Fortaleza 3 200 100 Goiania 4 200 100 Manaus 6 200 100
+Brasilia
+Vitoria 2 200 100 Fortaleza 3 200 100 Goiania 1 200 100 Manaus 3 200 100
+Vitoria
+Fortaleza 4 200 100 Goiania 3 200 100 Manaus 5 200 100
+Fortaleza
+Goiania 3 200 100 Manaus 3 200 100
+Goiania
+Manaus 3 200 100
+Recife
+Belo_Horizonte 2 200 100 Porto_Alegre 4 200 100 Rio_de_Janeiro 2 200 100
+Belo_Horizonte
+Porto_Alegre 2 200 100 Rio_de_Janeiro 1 200 100
+Porto_Alegre
+Rio_de_Janeiro 2 200 100

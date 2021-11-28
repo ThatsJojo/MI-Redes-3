@@ -1,0 +1,25 @@
+Tam
+Salvador
+Joao_Pessoa 1 200 100 Brasilia 2 200 100 Goiania 2 200 100 Belo_Horizonte 2 200 100 Porto_Alegre 5 200 100
+Sao_Luis
+Joao_Pessoa 2 200 100 Vitoria 4 200 100 Fortaleza 1 200 100 Belo_Horizonte 3 200 100 Porto_Alegre 4 200 100
+Sao_Paulo
+Joao_Pessoa 3 200 100 Brasilia 2 200 100 Belo_Horizonte 1 200 100 Porto_Alegre 2 200 100 Manaus 4 200 100
+Curitiba
+Joao_Pessoa 4 200 100 Brasilia 2 200 100 Vitoria 2 200 100 Fortaleza 4 200 100 Manaus 3 200 100
+Florianopolis
+Vitoria 2 200 100 Fortaleza 4 200 100 Manaus 4 200 100 Belo_Horizonte 2 200 100 Porto_Alegre 1 200 100
+Maceio
+Goiania 3 200 100 Manaus 5 200 100 Recife 1 200 100 Belo_Horizonte 2 200 100 Rio_de_Janeiro 3 200 100
+Joao_Pessoa
+Recife 1 200 100
+Brasilia
+Recife 2 200 100 Rio_de_Janeiro 2 200 100
+Vitoria
+Recife 3 200 100 Rio_de_Janeiro 1 200 100
+Fortaleza
+Recife 1 200 100 Rio_de_Janeiro 3 200 100
+Goiania
+Recife 3 200 100 Porto_Alegre 3 200 100 Rio_de_Janeiro 2 200 100
+Manaus
+Recife 4 200 100

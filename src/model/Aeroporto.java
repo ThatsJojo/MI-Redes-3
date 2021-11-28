@@ -18,10 +18,15 @@ public class Aeroporto {
         passageiros = new ArrayList();
     }
     
+    public String getNome(){
+        return nome;
+    }
+    
     @Override
     public String toString(){
-        return "Aeroporto"+id;
+        return  "{\"nome\":"+this.nome+"}";
     }
+   
     
     public void addPassageiro(Passageiro p){
         passageiros.add(p);

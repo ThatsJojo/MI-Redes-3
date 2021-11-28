@@ -78,6 +78,10 @@ public class Facade {
        return controladorDeVoos.cadastrarAeroporto(nome);
     }
     
+    public Aeroporto getAeroporto(String nome) throws NotVerticeException{
+       return controladorDeVoos.getAeroporto(nome);
+    }
+    
     public ArrayList<Voo> menorCaminho(Aeroporto origem, Aeroporto destino) throws NotPathException{
        return controladorDeVoos.menorCaminho(origem, destino);
     }
