@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,14 +26,13 @@ import thread.ThreadCliente;
  */
 public class Server {
     private static Facade f = Facade.getInstance();
-
+    public static HashMap<String, String> knownServer;
     public static void main(String[] args) {
-
         HashMap data_base = new HashMap<String, Object>();
-        
+        knownServer = new HashMap();
         try{
             importarArquivo("Cidades.txt");
-
+            importarArquivoCompanhia("Azul.txt"); //importa o arquivo da companhia
         }catch(NotVerticeException | IOException e){
             
         }
@@ -96,8 +96,6 @@ public class Server {
                 f.cadastrarAeroporto(nome);
                 contador--;//decrementa no contador
             }
-            importarArquivoCompanhia("Azul.txt"); //importa o arquivo da companhia
-            System.out.println("Here");
         } catch (FileNotFoundException exception) {
             throw new IOException();
         } finally {
@@ -121,8 +119,10 @@ public class Server {
         ) {
             String nomeAresta, linha;
             Aeroporto origem1;
-            nomeAresta = ler.readLine(); //lê a linha e armazena na string
-            Companhia companhia = f.cadastrarCompanhia(nomeAresta);
+            linha = ler.readLine(); //lê a linha e armazena na string
+            String[] header = linha.split(" ");
+            knownServer.put(header[0], header[1]);
+            Companhia companhia = f.cadastrarCompanhia(header[0]);
 
             linha = ler.readLine();//lê a proxima linha
             while (linha != null) { //enquanto n?o for o fim do arquivo
@@ -143,4 +143,5 @@ public class Server {
             throw new IOException();
         }
     }
+    
 }

@@ -16,6 +16,7 @@ import java.util.HashMap;
 import model.Voo;
 import java.util.ArrayList;
 import model.Aeroporto;
+import view.Server;
 
 /**
  *
@@ -41,8 +42,9 @@ public class TicketRouter implements Router{
     @Override
     public Object[] POST(Object body, HashMap data_base) {
         try {
+            // Exemplo de requisiç?o para outro servidor. 
             Object[] test = {"200", "OK", "Hehehe"};
-            URL url = new URL("http://127.0.0.1:8000/" + "ticket");
+            URL url = new URL(Server.knownServer.get("Azul") + "/ticket");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.addRequestProperty("Accept", "*/*");
             connection.addRequestProperty("Content-Type", "application/json");
