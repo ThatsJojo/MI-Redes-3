@@ -1,16 +1,16 @@
 /**
- * Componente Curricular: Mï¿½dulo Integrado de Concorrï¿½ncia e Conectividade
- * Autor: Cleyton Almeida da Silva, Estï¿½fane Carmo de Souza e Matheus Nascimento
+ * Componente Curricular: M?dulo Integrado de Concorr?ncia e Conectividade
+ * Autor: Cleyton Almeida da Silva, Est?fane Carmo de Souza e Matheus Nascimento
  * Data: 11/10/2021
  *
- * Declaro que este cï¿½digo foi elaborado por nï¿½s de forma colaborativa e
- * nï¿½o contï¿½m nenhum trecho de cï¿½digo de outro colega ou de outro autor,
- * tais como provindos de livros e apostilas, e pï¿½ginas ou documentos
- * eletrï¿½nicos da Internet. Qualquer trecho de cï¿½digo de outra autoria que
- * uma citaï¿½ï¿½o para o  nï¿½o a minha estï¿½ destacado com  autor e a fonte do
- * cï¿½digo, e estou ciente que estes trechos nï¿½o serï¿½o considerados para fins
- * de avaliaï¿½ï¿½o. Alguns trechos do cï¿½digo podem coincidir com de outros
- * colegas pois estes foram discutidos em sessï¿½es tutorias.
+ * Declaro que este c?digo foi elaborado por n?s de forma colaborativa e
+ * n?o cont?m nenhum trecho de c?digo de outro colega ou de outro autor,
+ * tais como provindos de livros e apostilas, e p?ginas ou documentos
+ * eletr?nicos da Internet. Qualquer trecho de c?digo de outra autoria que
+ * uma cita??o para o  n?o a minha est? destacado com  autor e a fonte do
+ * c?digo, e estou ciente que estes trechos n?o ser?o considerados para fins
+ * de avalia??o. Alguns trechos do c?digo podem coincidir com de outros
+ * colegas pois estes foram discutidos em sess?es tutorias.
  */
 package thread;
 
@@ -34,12 +34,12 @@ import util.RespostaHTTP;
 public class ThreadCliente extends Thread {
 
     private final Socket socket; //Socket
-    private boolean conectado; //Verifica a conexï¿½o com o servidor
+    private boolean conectado; //Verifica a conex?o com o servidor
     private HashMap data_base_ref; //Base de dados
     private static int qtd_list = 0; //Quantidade de pacientes graves que devem ser listados
 
     /**
-     * Mï¿½todo construtor da classe
+     * M?todo construtor da classe
      * @param cliente - cliente socket
      * @param data_base - base de dados
      */
@@ -49,7 +49,7 @@ public class ThreadCliente extends Thread {
     }
 
     /**
-     * Mï¿½todo que retorna a quantidade de pacientes graves a serem listados
+     * M?todo que retorna a quantidade de pacientes graves a serem listados
      * @return int - quantidade
      */
     public static int getQtd_list() {
@@ -57,7 +57,7 @@ public class ThreadCliente extends Thread {
     }
 
     /**
-     * Mï¿½todo que altera a quantidade de pacientes graves que devem ser listados
+     * M?todo que altera a quantidade de pacientes graves que devem ser listados
      * @param qtd_list - nova quantidade
      */
     public static void setQtd_list(int qtd_list) {
@@ -99,13 +99,14 @@ public class ThreadCliente extends Thread {
                     resposta.setMensagem("Not Found");
                     resposta.setCodigoResposta("404");
                 }
-                //lÃª todo o conteudo do arquivo para bytes e gera o conteudo de resposta
+                //lê todo o conteudo do arquivo para bytes e gera o conteudo de resposta
                 //converte o formato para o GMT espeficicado pelo protocolo HTTP
                 String dataFormatada = format.format(new Date());
                 //cabecalho padraoo da resposta HTTP/1.1
                 resposta.setCabecalho("Date", dataFormatada);
                 resposta.setCabecalho("Server", "PBL server/0.1");
                 resposta.setCabecalho("Content-Type", "application/json");
+                resposta.setCabecalho("Logic-Counter", RouterController.contadorLamport + "");
                 resposta.setCabecalho("Content-Length", resposta.getTamanhoResposta());
                 //cria o canal de resposta utilizando o outputStream
                 resposta.setSaida(socket.getOutputStream());
@@ -125,7 +126,7 @@ public class ThreadCliente extends Thread {
                 } catch (IOException ex) {
                     Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
                 } finally {
-                    conectado = false; //nï¿½o hï¿½ conexï¿½o
+                    conectado = false; //n?o h? conex?o
                 }
             }
 

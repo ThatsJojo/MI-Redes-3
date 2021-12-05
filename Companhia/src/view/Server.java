@@ -43,7 +43,7 @@ public class Server {
         try {
             System.out.println("Incializando o servidor...");
             //Iniciliza o servidor
-            serv = new ServerSocket(8000);
+            serv = new ServerSocket(8001);
             //serv = new ServerSocket(Integer.valueOf(System.getenv("PORT")));
 
             System.out.println("Servidor iniciado, ouvindo a porta " + serv.getLocalPort());
@@ -75,11 +75,11 @@ public class Server {
     
     
     /**
-     * MÃ©todo para importaÃ§Ã£o de um grafo a partir de um arquivo, em que contÃ©m
-     * o nÃºmero de cidades, cada linha contÃ©m o nome do cidade.
+     * Método para importaç?o de um grafo a partir de um arquivo, em que contém
+     * o número de cidades, cada linha contém o nome do cidade.
      *
      * @param nomeArquivo - nome do arquivo
-     * @throws IOException - exceÃ§Ã£o de arquivo
+     * @throws IOException - exceç?o de arquivo
      * @throws Exceptions.NotVerticeException
      */
     public static void importarArquivo(String nomeArquivo) throws IOException, NotVerticeException {
@@ -91,8 +91,8 @@ public class Server {
             ler = new BufferedReader(new FileReader(nomeArquivo));
             contador = Integer.parseInt(ler.readLine());
             while (contador > 0) {//enquanto contador for maior que 0
-                String linha = ler.readLine();//lÃª a linha
-                String nome = linha; //contÃ©m o nome do cidade
+                String linha = ler.readLine();//lê a linha
+                String nome = linha; //contém o nome do cidade
                 f.cadastrarAeroporto(nome);
                 contador--;//decrementa no contador
             }
@@ -109,9 +109,9 @@ public class Server {
     
     /**
      * Importa o arquivo com as rotas de uma companhia. A primeira linha
-     * contÃ©m o nome da companhia aÃ©rea. Cada linha contÃ©m o nome da cidade.
-     * ApÃ³s isso, cada uma linha com o nome da cidade e a seguinte com a cidade 
-     * adjacente e o peso da ligaÃ§Ã£o(de voo) separada por espaÃ§o.
+     * contém o nome da companhia aérea. Cada linha contém o nome da cidade.
+     * Após isso, cada uma linha com o nome da cidade e a seguinte com a cidade 
+     * adjacente e o peso da ligaç?o(de voo) separada por espaço.
      *
      * @param nomeArquivo - nome do arquivo
      * @throws IOException
@@ -121,15 +121,15 @@ public class Server {
         ) {
             String nomeAresta, linha;
             Aeroporto origem1;
-            nomeAresta = ler.readLine(); //lÃª a linha e armazena na string
+            nomeAresta = ler.readLine(); //lê a linha e armazena na string
             Companhia companhia = f.cadastrarCompanhia(nomeAresta);
 
-            linha = ler.readLine();//lÃª a proxima linha
-            while (linha != null) { //enquanto nÃ£o for o fim do arquivo
-                origem1 = f.getAeroporto(linha); //a linha lida Ã© o cidade
-                linha = ler.readLine();//lÃª a proxima linha
+            linha = ler.readLine();//lê a proxima linha
+            while (linha != null) { //enquanto n?o for o fim do arquivo
+                origem1 = f.getAeroporto(linha); //a linha lida é o cidade
+                linha = ler.readLine();//lê a proxima linha
                 String[] adjacencia = linha.split(" ");//separa em partes
-                for (int i = 0; i < adjacencia.length; i = i + 4) {//AtÃ© o fim do vetor
+                for (int i = 0; i < adjacencia.length; i = i + 4) {//Até o fim do vetor
                     Aeroporto destino2 = f.getAeroporto(adjacencia[i]); //indica o segundo cidade
                     double tempo = Double.parseDouble(adjacencia[i + 1]); //converte para int a string
                     double preco = Double.parseDouble(adjacencia[i + 2]); //converte para int a string

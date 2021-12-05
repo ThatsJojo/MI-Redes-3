@@ -24,6 +24,7 @@ import routes.TicketRouter;
 public class RouterController {
 
     private Router route;
+    public static int contadorLamport =0;
 
     public Object[] router(String url, String method, String body, HashMap data_base) {
         System.out.println(url);

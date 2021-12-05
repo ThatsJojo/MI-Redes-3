@@ -14,11 +14,13 @@
  */
 
 package util;
+import controller.RouterController;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -31,9 +33,11 @@ public class RequisicaoHTTP {
     private String body;
     private boolean manterViva = true;
     private long tempoLimite = 3000;
-    private Map<String, List> cabecalhos;
+    private HashMap<String, List> cabecalhos;
 
     public static RequisicaoHTTP lerRequisicao(InputStream entrada) throws IOException {
+        RouterController.contadorLamport++;
+
         RequisicaoHTTP requisicao = new RequisicaoHTTP();
         BufferedReader buffer = new BufferedReader(new InputStreamReader(entrada));
         /* LÃª a primeira linha
@@ -81,6 +85,14 @@ public class RequisicaoHTTP {
             //seta o manter viva a conexao se o connection for keep-alive
             requisicao.setManterViva(requisicao.getCabecalhos().get("Connection").get(0).equals("keep-alive"));
         }
+        if (requisicao.getCabecalhos().containsKey("Logic-Counter")) {
+            //seta o manter viva a conexao se o connection for keep-alive
+            int counterOtherServer = Integer.parseInt((String)requisicao.cabecalhos.get("Logic-Counter").get(0));
+            System.out.println(counterOtherServer);
+            if(counterOtherServer > RouterController.contadorLamport){
+                RouterController.contadorLamport = counterOtherServer+ 1;
+            }
+        }
         return requisicao;
     }
 
@@ -91,7 +103,7 @@ public class RequisicaoHTTP {
      */
     public void setCabecalho(String chave, String... valores) {
         if (cabecalhos == null) {
-            cabecalhos = new TreeMap();
+            cabecalhos = new HashMap();
         }
         cabecalhos.put(chave, Arrays.asList(valores));
     }
@@ -187,7 +199,7 @@ public class RequisicaoHTTP {
      * Método que altera a lista de cabeçalhos
      * @param cabecalhos - nova lista
      */
-    public void setCabecalhos(Map<String, List> cabecalhos) {
+    public void setCabecalhos(HashMap<String, List> cabecalhos) {
         this.cabecalhos = cabecalhos;
     }
 
