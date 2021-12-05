@@ -115,9 +115,6 @@ public class Grafo <V>{
         return vertices.size();
     }
     
-    public ArrayList<ArrayList<Aresta>> caminhos(V origem, V destino){
-        return null;
-    }
     
     public ArrayList<Aresta<V>> menorCaminho(V origem, V destino) throws NotPathException{
         if(!this.containsVertice(origem)||!this.containsVertice(destino))

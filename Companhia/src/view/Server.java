@@ -14,6 +14,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Aeroporto;
@@ -32,7 +33,12 @@ public class Server {
         knownServer = new HashMap();
         try{
             importarArquivo("Cidades.txt");
-            importarArquivoCompanhia("Azul.txt"); //importa o arquivo da companhia
+            System.out.println("Digite o nome do servidor: ");
+            Scanner scan = new Scanner(System.in);
+            String companhia = scan.next();
+            importServers();
+            importarArquivoCompanhia(companhia+".txt"); //importa o arquivo da companhia
+            
         }catch(NotVerticeException | IOException e){
             
         }
@@ -105,6 +111,23 @@ public class Server {
         }
     }
     
+    public static void importServers() throws IOException{
+        try (BufferedReader ler = new BufferedReader(new FileReader("boot.txt")) //fecha o arquivo
+        ) {
+            String linha = ler.readLine();//lê a proxima linha
+            String[] header = linha.split(" ");
+
+            while (linha != null) { //enquanto n?o for o fim do arquivo
+                header = linha.split(" ");
+                knownServer.put(header[0], header[1]);
+                linha = ler.readLine();
+            }
+        } catch (FileNotFoundException exception) {
+            throw new IOException();
+        }
+
+    }
+    
     /**
      * Importa o arquivo com as rotas de uma companhia. A primeira linha
      * contém o nome da companhia aérea. Cada linha contém o nome da cidade.
@@ -121,7 +144,6 @@ public class Server {
             Aeroporto origem1;
             linha = ler.readLine(); //lê a linha e armazena na string
             String[] header = linha.split(" ");
-            knownServer.put(header[0], header[1]);
             Companhia companhia = f.cadastrarCompanhia(header[0]);
 
             linha = ler.readLine();//lê a proxima linha

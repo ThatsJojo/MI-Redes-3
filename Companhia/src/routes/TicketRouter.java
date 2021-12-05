@@ -28,12 +28,13 @@ public class TicketRouter implements Router{
     public Object[] GET(Object body, HashMap data_base) {
         Facade f = Facade.getInstance();
         ArrayList<ArrayList<Aeroporto>> list = null;
+        Gson gson = new Gson();
+        HashMap<String, String> entries = gson.fromJson((String) body, HashMap.class);
         try{
-           list = f.getRotas(f.getAeroporto("Salvador"), f.getAeroporto("Sao_Luis"));
+           list = f.getRotas(f.getAeroporto(entries.get("origem")), f.getAeroporto(entries.get("destino")));
         }catch(Exception e){
             
         }
-        Gson gson = new Gson();
         String result =gson.toJson(list);
         Object[] response = {"200", "OK", result};
         return response;
@@ -45,6 +46,7 @@ public class TicketRouter implements Router{
             // Exemplo de requisiç?o para outro servidor. 
             Object[] test = {"200", "OK", "Hehehe"};
             URL url = new URL(Server.knownServer.get("Azul") + "/ticket");
+            System.out.println(Server.knownServer.get("Azul"));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.addRequestProperty("Accept", "*/*");
             connection.addRequestProperty("Content-Type", "application/json");
