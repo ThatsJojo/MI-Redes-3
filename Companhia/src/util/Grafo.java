@@ -219,6 +219,9 @@ public class Grafo <V>{
         }
         ArrayList<ArrayList<V>> ret = new ArrayList();
         ArrayList<ComparablePath> retPaths = new ArrayList(caminhos.size());
+        System.out.println("Size:" + caminhos.size());
+        System.out.println(caminhos);
+        
         caminhos.forEach((Double u, ArrayList<V> t) -> {
             //System.out.println("Peso: "+u);
             retPaths.add(new ComparablePath(t, u));
@@ -277,15 +280,17 @@ public class Grafo <V>{
             caminhos.put(tamanho,ret);
             return;
         }
-        passados.add(origem);
         caminhoAtual.add(origem);
-        bucketArestas.get(origem).forEach((aresta)->{
-            V prox = aresta.getDestino();
+        ArrayList<Aresta<V>> adj = bucketArestas.get(origem);
+        passados.add(origem);
+        for(int i=0; i < adj.size(); i++){
+            V prox = adj.get(i).getDestino();
             if(!passados.contains(prox)){
-                buscaRecursiva(prox, destino, passados, naoPassados,caminhos, tamanho+aresta.getPeso(), copiaDe(caminhoAtual));
+                buscaRecursiva(prox, destino, passados, naoPassados,caminhos, tamanho+adj.get(i).getPeso(), copiaDe(caminhoAtual));
             }
-            passados.remove(origem);
-        });
+        }
+        passados.remove(origem);
+
     }    
     
 }

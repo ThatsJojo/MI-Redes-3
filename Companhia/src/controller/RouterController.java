@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import java.util.HashMap;
 import routes.Router;
 import routes.TicketRouter;
+import routes.WayRouter;
 
 
 
@@ -47,6 +48,18 @@ public class RouterController {
             System.out.println(path);
             if (path.equals("/ticket")) {
                 route = new TicketRouter();
+                if (method.equals("POST")) {
+                    return route.POST(body, data_base);
+                } else if (method.equals("PUT")) {
+                    return route.PUT(body, data_base);
+                } else if (method.equals("GET")) {
+                    return route.GET(queryParams, data_base);
+                } else if (method.equals("DELETE")) {
+                    return route.DELETE(queryParams, data_base);
+                }
+            }
+             if (path.equals("/caminho")) {
+                route = new WayRouter();
                 if (method.equals("POST")) {
                     return route.POST(body, data_base);
                 } else if (method.equals("PUT")) {

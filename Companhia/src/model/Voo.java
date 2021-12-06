@@ -125,6 +125,11 @@ public class Voo implements Aresta<Aeroporto>{
         p.getPassageiro().getViagens(idViagemAtual).removePassagem(p);
         passagens.remove(p.getId());
     }
+
+    @Override
+    public String toString() {
+        return "Voo{" + "origem=" + origem + ", destino=" + destino ;
+    }
     
     
     

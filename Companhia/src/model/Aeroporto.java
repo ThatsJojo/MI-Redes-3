@@ -24,7 +24,7 @@ public class Aeroporto {
     
     @Override
     public String toString(){
-        return  "{\"nome\":"+this.nome+"}";
+        return  "{\"nome\":"+this.nome+",}";
     }
    
     
