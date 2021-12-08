@@ -220,10 +220,6 @@ public class Grafo <V>{
         ArrayList<ArrayList<V>> ret = new ArrayList();
         ArrayList<ComparablePath> retPaths = new ArrayList(caminhos.size());
         System.out.println("Size:" + caminhos.size());
-        caminhos.forEach((t, u) -> {
-            System.out.println(u);
-        });
-        
         
         caminhos.forEach((Double u, ArrayList<V> t) -> {
             //System.out.println("Peso: "+u);
