@@ -220,7 +220,10 @@ public class Grafo <V>{
         ArrayList<ArrayList<V>> ret = new ArrayList();
         ArrayList<ComparablePath> retPaths = new ArrayList(caminhos.size());
         System.out.println("Size:" + caminhos.size());
-        System.out.println(caminhos);
+        caminhos.forEach((t, u) -> {
+            System.out.println(u);
+        });
+        
         
         caminhos.forEach((Double u, ArrayList<V> t) -> {
             //System.out.println("Peso: "+u);
@@ -277,6 +280,9 @@ public class Grafo <V>{
         if(origem.equals(destino)){
             ArrayList<V> ret = copiaDe(caminhoAtual);
             ret.add(origem);
+            while(caminhos.containsKey(tamanho)){
+                tamanho+=0.001;
+            }
             caminhos.put(tamanho,ret);
             return;
         }
