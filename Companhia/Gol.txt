@@ -1,23 +1,7 @@
 Gol http://127.0.0.1:8003
 Rio_de_Janeiro
-Salvador 2 200 220 Sao_Luis 3 200 100 Sao_Paulo 1 200 100 Curitiba 1 200 100 Florianopolis 1 200 100
-Porto_Alegre
-Maceio 4 200 100 Joao_Pessoa 5 200 100 Brasilia 2 200 100 Vitoria 4 200 100 Fortaleza 4 200 100
-Belo_Horizonte
-Brasilia 1 200 100 Vitoria 1 200 100 Fortaleza 3 200 100 Goiania 1 200 100 Manaus 5 200 100
-Recife
-Salvador 1 200 100 Sao_Luis 2 200 100 Sao_Paulo 3 200 100 Curitiba 3 200 100 Florianopolis 4 200 100
-Manaus
-Salvador 5 200 100 Porto_Alegre 5 200 100 Rio_de_Janeiro 4 200 100 Sao_Luis 6 200 100
-Goiania
-Sao_Luis 4 200 100 Sao_Paulo 1 200 100 Curitiba 3 200 100 Florianopolis 3 200 100
-Fortaleza
-Maceio 2 200 100 Sao_Paulo 3 200 100 Salvador 2 200 100
-Vitoria
-Maceio 3 200 100 Salvador 1 200 100 Sao_Paulo 1 200 100
+Sao_Paulo 1 320 100
 Brasilia
-Florianopolis 2 200 100 Maceio 2 200 100 Sao_Luis 2 200 100
-Joao_Pessoa
-Maceio 1 200 100 Florianopolis 4 200 100 Rio_de_Janeiro 3 200 100 Belo_Horizonte 2 200 100
-Curitiba
-Belo_Horizonte 2 200 100 Porto_Alegre 1 200 100
+Rio_de_Janeiro 2 340 100 Salvador 2 390 100 Maceio 3 400 100
+Salvador
+Maceio 3 200 100
