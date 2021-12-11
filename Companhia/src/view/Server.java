@@ -38,8 +38,8 @@ public class Server {
             String companhia = scan.next();
             importServers();
             importarArquivoCompanhia("Azul.txt"); //importa o arquivo da companhia
-          importarArquivoCompanhia("Gol.txt"); //importa o arquivo da companhia
-           //importarArquivoCompanhia("Tam.txt"); //importa o arquivo da companhia
+            importarArquivoCompanhia("Gol.txt"); //importa o arquivo da companhia
+            importarArquivoCompanhia("Tam.txt"); //importa o arquivo da companhia
             
         }catch(NotVerticeException | IOException e){
             

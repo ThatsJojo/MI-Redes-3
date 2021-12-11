@@ -5,6 +5,7 @@
         <group>
             <file>file:/Users/matheusnascimento/Documents/UEFS/2021.2/pbl/MI-Redes-3/Companhia/src/facade/Facade.java</file>
             <file>file:/Users/matheusnascimento/Documents/UEFS/2021.2/pbl/MI-Redes-3/Companhia/src/controller/RouterController.java</file>
+            <file>file:/Users/matheusnascimento/Documents/UEFS/2021.2/pbl/MI-Redes-3/Companhia/src/util/RequisicaoHTTP.java</file>
             <file>file:/Users/matheusnascimento/Documents/UEFS/2021.2/pbl/MI-Redes-3/Companhia/src/view/ViewPassageiro.java</file>
             <file>file:/Users/matheusnascimento/Documents/UEFS/2021.2/pbl/MI-Redes-3/Companhia/src/thread/ThreadCliente.java</file>
             <file>file:/Users/matheusnascimento/Documents/UEFS/2021.2/pbl/MI-Redes-3/Companhia/src/model/ControladorDeadLocks.java</file>
@@ -17,6 +18,7 @@
             <file>file:/Users/matheusnascimento/Documents/UEFS/2021.2/pbl/MI-Redes-3/Companhia/src/model/Aeroporto.java</file>
             <file>file:/Users/matheusnascimento/Documents/UEFS/2021.2/pbl/MI-Redes-3/Companhia/src/model/Voo.java</file>
             <file>file:/Users/matheusnascimento/Documents/UEFS/2021.2/pbl/MI-Redes-3/Companhia/src/model/Passageiro.java</file>
+            <file>file:/Users/matheusnascimento/Documents/UEFS/2021.2/pbl/MI-Redes-3/Companhia/src/util/RespostaHTTP.java</file>
             <file>file:/Users/matheusnascimento/Documents/UEFS/2021.2/pbl/MI-Redes-3/Companhia/src/view/BilheteCompartilhado.java</file>
             <file>file:/Users/matheusnascimento/Documents/UEFS/2021.2/pbl/MI-Redes-3/Companhia/src/routes/WayRouter.java</file>
             <file>file:/Users/matheusnascimento/Documents/UEFS/2021.2/pbl/MI-Redes-3/Companhia/src/view/Server.java</file>
