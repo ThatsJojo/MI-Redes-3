@@ -37,7 +37,9 @@ public class Server {
             Scanner scan = new Scanner(System.in);
             String companhia = scan.next();
             importServers();
-            importarArquivoCompanhia(companhia+".txt"); //importa o arquivo da companhia
+            importarArquivoCompanhia("Azul.txt"); //importa o arquivo da companhia
+          importarArquivoCompanhia("Gol.txt"); //importa o arquivo da companhia
+           //importarArquivoCompanhia("Tam.txt"); //importa o arquivo da companhia
             
         }catch(NotVerticeException | IOException e){
             

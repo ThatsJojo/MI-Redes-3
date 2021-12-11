@@ -108,6 +108,7 @@ public class ThreadCliente extends Thread {
                 resposta.setCabecalho("Content-Type", "application/json");
                 resposta.setCabecalho("Logic-Counter", RouterController.contadorLamport + "");
                 resposta.setCabecalho("Content-Length", resposta.getTamanhoResposta());
+                resposta.setCabecalho("Access-Control-Allow-Origin", "*");
                 //cria o canal de resposta utilizando o outputStream
                 resposta.setSaida(socket.getOutputStream());
                 resposta.enviar();
