@@ -4,7 +4,7 @@ Rio_de_Janeiro 2 230 100
 Brasilia
 Sao_Paulo 2 290 100
 Rio_de_Janeiro
-Brasilia 2 350 100
+Brasilia 2 350 100 Salvador 2 250 100
 Sao_Paulo
 Maceio 3 390 100
 Maceio

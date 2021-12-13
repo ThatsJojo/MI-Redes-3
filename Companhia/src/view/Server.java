@@ -37,9 +37,9 @@ public class Server {
             Scanner scan = new Scanner(System.in);
             String companhia = scan.next();
             importServers();
-            importarArquivoCompanhia("Azul.txt"); //importa o arquivo da companhia
-            importarArquivoCompanhia("Gol.txt"); //importa o arquivo da companhia
-            importarArquivoCompanhia("Tam.txt"); //importa o arquivo da companhia
+            importarArquivoCompanhia("Azul"); //importa o arquivo da companhia
+            importarArquivoCompanhia("Gol"); //importa o arquivo da companhia
+            importarArquivoCompanhia("Tam"); //importa o arquivo da companhia
             
         }catch(NotVerticeException | IOException e){
             
@@ -140,13 +140,13 @@ public class Server {
      * @throws IOException
      */
     public static void importarArquivoCompanhia(String nomeArquivo) throws IOException, NotVerticeException{
-        try (BufferedReader ler = new BufferedReader(new FileReader(nomeArquivo)) //fecha o arquivo
+        Companhia companhia = f.cadastrarCompanhia(nomeArquivo);//Companhia recebe o nome da Companhia
+        try (BufferedReader ler = new BufferedReader(new FileReader(nomeArquivo+".txt")) //fecha o arquivo
         ) {
             String nomeAresta, linha;
             Aeroporto origem1;
             linha = ler.readLine(); //lê a linha e armazena na string
             String[] header = linha.split(" ");
-            Companhia companhia = f.cadastrarCompanhia(header[0]);
 
             linha = ler.readLine();//lê a proxima linha
             while (linha != null) { //enquanto n?o for o fim do arquivo

@@ -35,4 +35,9 @@ public class TesteClass<V> implements Aresta{
     public Double getPeso() {
         return peso;
     }
+
+    @Override
+    public boolean able() {
+        return true;
+    }
 }

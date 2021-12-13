@@ -15,6 +15,7 @@ public class Voo implements Aresta<Aeroporto>{
     private final double precoBase;
     private final double tempoBase;
     private final Companhia companhia;
+    private boolean cheio;
     private static int count = 0;
     
     private static int getID(){
@@ -47,7 +48,9 @@ public class Voo implements Aresta<Aeroporto>{
         return companhia;
     }
     
-    
+    public boolean isCheio(){
+        return cheio;
+    }
     
     public int getId() {
             return id;
@@ -71,6 +74,7 @@ public class Voo implements Aresta<Aeroporto>{
 
     public void cadastrarPassageiro(Passageiro e){
         passageiros.put(e.getIdPassageiro(), e);
+        cheio = passageiros.size()==numeroDePassageiros;
     }
 
     public HashMap<Integer, Passagem> getPassagens() {
@@ -130,8 +134,10 @@ public class Voo implements Aresta<Aeroporto>{
     public String toString() {
         return "Voo{" + "origem=" + origem + ", destino=" + destino ;
     }
+
+    @Override
+    public boolean able() {
+        return !cheio;
+    }
     
-    
-    
-	
 }
