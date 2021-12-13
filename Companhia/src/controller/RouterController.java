@@ -16,16 +16,18 @@ package controller;
 
 import com.google.gson.Gson;
 import java.util.HashMap;
+import routes.CadastrarVooRouter;
+import routes.EffectiveBuyRouter;
+import routes.PurchaseRouter;
+import routes.ReserveRouter;
 import routes.Router;
 import routes.TicketRouter;
 import routes.WayRouter;
 
-
-
 public class RouterController {
 
     private Router route;
-    public static int contadorLamport =0;
+    public static int contadorLamport = 0;
 
     public Object[] router(String url, String method, String body, HashMap data_base) {
         System.out.println(url);
@@ -58,7 +60,7 @@ public class RouterController {
                     return route.DELETE(queryParams, data_base);
                 }
             }
-             if (path.equals("/caminho")) {
+            if (path.equals("/caminho")) {
                 route = new WayRouter();
                 if (method.equals("POST")) {
                     return route.POST(body, data_base);
@@ -70,6 +72,57 @@ public class RouterController {
                     return route.DELETE(queryParams, data_base);
                 }
             }
+            if (path.equals("/reserve")) {
+                route = new ReserveRouter();
+                if (method.equals("POST")) {
+                    return route.POST(body, data_base);
+                } else if (method.equals("PUT")) {
+                    return route.PUT(body, data_base);
+                } else if (method.equals("GET")) {
+                    return route.GET(queryParams, data_base);
+                } else if (method.equals("DELETE")) {
+                    return route.DELETE(queryParams, data_base);
+                }
+            }
+            if (path.equals("/purchase")) {
+                route = new PurchaseRouter();
+                if (method.equals("POST")) {
+                    return route.POST(body, data_base);
+                } else if (method.equals("PUT")) {
+                    return route.PUT(body, data_base);
+                } else if (method.equals("GET")) {
+                    return route.GET(queryParams, data_base);
+                } else if (method.equals("DELETE")) {
+                    return route.DELETE(queryParams, data_base);
+                }
+            }
+            if (path.equals("/buy")) {
+                route = new EffectiveBuyRouter();
+                if (method.equals("POST")) {
+                    return route.POST(body, data_base);
+                } else if (method.equals("PUT")) {
+                    return route.PUT(body, data_base);
+                } else if (method.equals("GET")) {
+                    return route.GET(queryParams, data_base);
+                } else if (method.equals("DELETE")) {
+                    return route.DELETE(queryParams, data_base);
+                }
+            }
+            if (path.equals("/addVoo")) {
+                route = new CadastrarVooRouter();
+                if (method.equals("POST")) {
+                    System.out.println("POST");
+                    return route.POST(body, data_base);
+                } else if (method.equals("PUT")) {
+                    return route.PUT(body, data_base);
+                } else if (method.equals("GET")) {
+                    System.out.println("GET");
+                    return route.GET(queryParams, data_base);
+                } else if (method.equals("DELETE")) {
+                    return route.DELETE(queryParams, data_base);
+                }
+            }
+
             String[] responseNotFoud = {"404", "Not found", ""};
             return responseNotFoud;
         } catch (Exception e) {

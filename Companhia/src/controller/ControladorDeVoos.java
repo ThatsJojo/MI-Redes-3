@@ -12,6 +12,7 @@ import Exceptions.NotPassException;
 import Exceptions.NotPathException;
 import Exceptions.NotVerticeException;
 import Exceptions.NotVooException;
+import java.util.HashMap;
 import java.util.Iterator;
 import model.Companhia;
 import util.Semaforo;
@@ -20,9 +21,11 @@ import util.Semaforo;
 public class ControladorDeVoos {
     private static ControladorDeVoos controladorDeVoos;
     private final Grafo<Aeroporto> grafo;
+    private final HashMap<Integer, Voo> voos;
     
     private ControladorDeVoos() {
         this.grafo = new Grafo();
+        voos = new HashMap();
     }
     
     public static synchronized ControladorDeVoos getInstance(){
@@ -34,6 +37,12 @@ public class ControladorDeVoos {
    
     public Aeroporto cadastrarAeroporto(String nome) throws NotVerticeException{
         Aeroporto aeroporto = new Aeroporto(nome);
+        grafo.addVertice(aeroporto);
+        return aeroporto;
+    }
+    
+    public Aeroporto cadastrarAeroporto(String nome, int id) throws NotVerticeException{
+        Aeroporto aeroporto = new Aeroporto(nome, id);
         grafo.addVertice(aeroporto);
         return aeroporto;
     }
@@ -69,6 +78,7 @@ public class ControladorDeVoos {
     public Voo cadastrarVoo(Aeroporto a1, Aeroporto a2, int numeroDePassageiros, double precoBase, Companhia companhia, double tempoBase) throws NotVerticeException{
         Voo v = new Voo(a1, a2, numeroDePassageiros, precoBase, companhia, tempoBase);
         grafo.addAresta(v);
+        voos.put(v.getId(), v);
         Semaforo.getInstance().cadastrarRecurso(v, v.getNumeroDePassageiros());
         return v;
     }
@@ -79,7 +89,7 @@ public class ControladorDeVoos {
    
     public Passagem criarPassagem(Passageiro p, Voo v) throws NotPassException{
         if(!Semaforo.getInstance().down(v)){
-            throw new NotPassException();
+            throw new NotPassException(v);
         }
         Passagem m = new Passagem(v, p);
         v.cadastrarPassageiro(p);
@@ -94,5 +104,9 @@ public class ControladorDeVoos {
     public void devolverPassagem(Passagem p, int idViagemAtual) {
         p.getVoo().removerPassgaem(p, idViagemAtual);
         Semaforo.getInstance().up(p.getVoo());
+    }
+    
+    public Voo getVoo(int id){
+        return voos.get(id);
     }
 }

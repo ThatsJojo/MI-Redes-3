@@ -34,6 +34,10 @@ public class ControllerUsuarios {
         return p;
     }
     
+    public Companhia getCompanhia(String nome){
+        return companhias.get(nome);
+    }
+    
     public Passageiro getPassageiro(int id){
         return passageiros.get(id);
     }

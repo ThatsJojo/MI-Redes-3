@@ -1,6 +1,6 @@
 Azul http://127.0.0.1:8000
 Salvador
-Brasilia 2 390 100
+Brasilia 2 390 2
 Sao_Paulo
 Rio_de_Janeiro 1 205 100 Brasilia 2 330 100
 Maceio

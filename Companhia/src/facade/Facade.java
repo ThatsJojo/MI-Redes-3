@@ -62,6 +62,10 @@ public class Facade {
         return passagem;
     }
     
+    public Passagem comprarPorID(int idVoo, String nome) throws NotPassException{
+        return controladorDeVoos.criarPassagem(new Passageiro(nome), controladorDeVoos.getVoo(idVoo));
+    }
+    
     public void devolverPassagem(Passagem p, int idViagemAtual){
         controladorDeVoos.devolverPassagem(p, idViagemAtual);
     }
@@ -78,8 +82,16 @@ public class Facade {
        return controladorDeVoos.cadastrarAeroporto(nome);
     }
     
+    public Aeroporto cadastrarAeroporto(String nome, int id) throws NotVerticeException{
+       return controladorDeVoos.cadastrarAeroporto(nome, id);
+    }
+    
     public Aeroporto getAeroporto(String nome) throws NotVerticeException{
        return controladorDeVoos.getAeroporto(nome);
+    }
+    
+    public Companhia getCompanhia(String nome) throws NotVerticeException{
+       return controllerUsuarios.getCompanhia(nome);
     }
     
     public ArrayList<Voo> menorCaminho(Aeroporto origem, Aeroporto destino) throws NotPathException{

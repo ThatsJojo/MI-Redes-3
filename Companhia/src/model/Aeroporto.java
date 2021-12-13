@@ -1,5 +1,6 @@
 package model;
 
+import Exceptions.NotVerticeException;
 import java.util.ArrayList;
 
 public class Aeroporto {
@@ -14,6 +15,14 @@ public class Aeroporto {
 
     public Aeroporto(String nome) {
         this.id = Aeroporto.getID();
+        this.nome = nome;
+        passageiros = new ArrayList();
+    }
+
+    public Aeroporto(String nome, int id) throws NotVerticeException {
+        if(id<count)
+            throw new NotVerticeException();
+        this.id = id;
         this.nome = nome;
         passageiros = new ArrayList();
     }

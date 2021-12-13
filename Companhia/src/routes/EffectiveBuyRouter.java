@@ -5,17 +5,34 @@
  */
 package routes;
 
+import Exceptions.NotPassException;
+import com.google.gson.Gson;
+import facade.Facade;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- *Rota para realizar a compra de passagens previamente reservadas.
+ * Rota para realizar a compra de passagens previamente reservadas.
+ *
  * @author Cleyton
  */
-public class EffectiveBuyRouter implements Router{
+public class EffectiveBuyRouter implements Router {
 
     @Override
     public Object[] GET(Object body, HashMap data_base) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Facade f = Facade.getInstance();
+        Gson gson = new Gson();
+        HashMap<String, String> entries = gson.fromJson((String) body, HashMap.class);
+        try {
+            f.comprarPorID(Integer.parseInt(entries.get("vooID")), entries.get("nome"));
+            Object[] response = {"200", "OK", "Passagem comprada sucesso."};
+            return response;
+        } catch (NotPassException ex) {
+            Object[] response = {"500", "ERRO", ex.getMessage()};
+            return response;
+        }
+
     }
 
     @Override
@@ -32,5 +49,5 @@ public class EffectiveBuyRouter implements Router{
     public Object[] DELETE(Object body, HashMap data_base) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

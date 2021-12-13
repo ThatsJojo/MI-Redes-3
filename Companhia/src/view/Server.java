@@ -100,8 +100,8 @@ public class Server {
             contador = Integer.parseInt(ler.readLine());
             while (contador > 0) {//enquanto contador for maior que 0
                 String linha = ler.readLine();//lê a linha
-                String nome = linha; //contém o nome do cidade
-                f.cadastrarAeroporto(nome);
+                String[] aeroporto = linha.split(" "); //contém o nome do cidade
+                f.cadastrarAeroporto(aeroporto[0], Integer.parseInt(aeroporto[1]));
                 contador--;//decrementa no contador
             }
         } catch (FileNotFoundException exception) {

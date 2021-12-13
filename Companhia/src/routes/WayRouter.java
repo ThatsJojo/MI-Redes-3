@@ -4,23 +4,11 @@
  */
 package routes;
 
-import Exceptions.NotVerticeException;
-import Exceptions.NotVooException;
 import com.google.gson.Gson;
-import controller.RouterController;
 import facade.Facade;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
-import model.Voo;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Aeroporto;
-import view.Server;
 
 /**
  *

@@ -132,7 +132,7 @@ public class Voo implements Aresta<Aeroporto>{
 
     @Override
     public String toString() {
-        return "Voo{" + "origem=" + origem + ", destino=" + destino ;
+        return "Voo{" + "origem=" + origem + ", destino=" + destino + ", id=" + id + ", nPassageiros=" + numeroDePassageiros + '}';
     }
 
     @Override

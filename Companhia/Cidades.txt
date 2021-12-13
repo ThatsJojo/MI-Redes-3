@@ -1,6 +1,6 @@
 5
-Salvador
-Sao_Paulo
-Maceio
-Brasilia
-Rio_de_Janeiro
+Salvador 0
+Sao_Paulo 1
+Maceio 2
+Brasilia 3
+Rio_de_Janeiro 4
