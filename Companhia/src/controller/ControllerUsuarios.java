@@ -34,7 +34,7 @@ public class ControllerUsuarios {
         return p;
     }
     
-    public Companhia getCompanhia(String nome){
+    public Companhia getCompanhia(int nome){
         return companhias.get(nome);
     }
     

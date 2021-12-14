@@ -109,6 +109,7 @@ public class RouterController {
                 }
             }
             if (path.equals("/addVoo")) {
+                System.out.println(method);
                 route = new CadastrarVooRouter();
                 if (method.equals("POST")) {
                     System.out.println("POST");

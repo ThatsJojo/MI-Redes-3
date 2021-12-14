@@ -27,7 +27,7 @@ public class CadastrarVooRouter implements Router {
                     f.getAeroporto(entries.get("destino")),
                     Integer.parseInt(entries.get("nPassageiros")),
                     Double.parseDouble(entries.get("precoBase")),
-                    f.getCompanhia(entries.get("companhia")),
+                    f.getCompanhia(Integer.parseInt(entries.get("companhia"))),
                     Double.parseDouble(entries.get("tempoBase")));
             Object[] response = {"200", "OK", "Voo cadastrado com sucesso."};
             return response;

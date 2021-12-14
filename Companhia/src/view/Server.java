@@ -28,40 +28,39 @@ import thread.ThreadCliente;
 public class Server {
     private static Facade f = Facade.getInstance();
     public static HashMap<String, String> knownServer;
+
     public static void main(String[] args) {
         HashMap data_base = new HashMap<String, Object>();
         knownServer = new HashMap();
-        try{
+        try {
             importarArquivo("Cidades.txt");
             System.out.println("Digite o nome do servidor: ");
             Scanner scan = new Scanner(System.in);
             String companhia = scan.next();
             importServers();
-            importarArquivoCompanhia("Azul"); //importa o arquivo da companhia
-            importarArquivoCompanhia("Gol"); //importa o arquivo da companhia
-            importarArquivoCompanhia("Tam"); //importa o arquivo da companhia
-            
-        }catch(NotVerticeException | IOException e){
-            
+            importarArquivoCompanhia("Azul"); // importa o arquivo da companhia
+            importarArquivoCompanhia("Gol"); // importa o arquivo da companhia
+            importarArquivoCompanhia("Tam"); // importa o arquivo da companhia
+
+        } catch (NotVerticeException | IOException e) {
+            System.out.println(e);
+
         }
-        
-        
-        
+
         ServerSocket serv = null;
         try {
             System.out.println("Incializando o servidor...");
-            //Iniciliza o servidor
+            // Iniciliza o servidor
             serv = new ServerSocket(8001);
-            //serv = new ServerSocket(Integer.valueOf(System.getenv("PORT")));
+            // serv = new ServerSocket(Integer.valueOf(System.getenv("PORT")));
 
             System.out.println("Servidor iniciado, ouvindo a porta " + serv.getLocalPort());
             System.out.println("Host: " + serv.toString());
-       
-            
+
             while (true) {
                 Socket clie = serv.accept();
                 System.out.println(clie.getInetAddress().getHostAddress());
-                //Inicia thread do cliente
+                // Inicia thread do cliente
 
                 new ThreadCliente(clie, data_base).start();
             }
@@ -80,14 +79,13 @@ public class Server {
 
         }
     }
-    
-    
+
     /**
-     * Método para importaç?o de um grafo a partir de um arquivo, em que contém
-     * o número de cidades, cada linha contém o nome do cidade.
+     * Mï¿½todo para importaï¿½?o de um grafo a partir de um arquivo, em que contï¿½m
+     * o nï¿½mero de cidades, cada linha contï¿½m o nome do cidade.
      *
      * @param nomeArquivo - nome do arquivo
-     * @throws IOException - exceç?o de arquivo
+     * @throws IOException                    - exceï¿½?o de arquivo
      * @throws Exceptions.NotVerticeException
      */
     public static void importarArquivo(String nomeArquivo) throws IOException, NotVerticeException {
@@ -98,28 +96,28 @@ public class Server {
         try {
             ler = new BufferedReader(new FileReader(nomeArquivo));
             contador = Integer.parseInt(ler.readLine());
-            while (contador > 0) {//enquanto contador for maior que 0
-                String linha = ler.readLine();//lê a linha
-                String[] aeroporto = linha.split(" "); //contém o nome do cidade
+            while (contador > 0) {// enquanto contador for maior que 0
+                String linha = ler.readLine();// lï¿½ a linha
+                String[] aeroporto = linha.split(" "); // contï¿½m o nome do cidade
                 f.cadastrarAeroporto(aeroporto[0], Integer.parseInt(aeroporto[1]));
-                contador--;//decrementa no contador
+                contador--;// decrementa no contador
             }
         } catch (FileNotFoundException exception) {
             throw new IOException();
         } finally {
             if (ler != null) {
-                ler.close(); //fecha o arquivo
+                ler.close(); // fecha o arquivo
             }
         }
     }
-    
-    public static void importServers() throws IOException{
-        try (BufferedReader ler = new BufferedReader(new FileReader("boot.txt")) //fecha o arquivo
+
+    public static void importServers() throws IOException {
+        try (BufferedReader ler = new BufferedReader(new FileReader("boot.txt")) // fecha o arquivo
         ) {
-            String linha = ler.readLine();//lê a proxima linha
+            String linha = ler.readLine();// lï¿½ a proxima linha
             String[] header = linha.split(" ");
 
-            while (linha != null) { //enquanto n?o for o fim do arquivo
+            while (linha != null) { // enquanto n?o for o fim do arquivo
                 header = linha.split(" ");
                 knownServer.put(header[0], header[1]);
                 linha = ler.readLine();
@@ -129,37 +127,38 @@ public class Server {
         }
 
     }
-    
+
     /**
      * Importa o arquivo com as rotas de uma companhia. A primeira linha
-     * contém o nome da companhia aérea. Cada linha contém o nome da cidade.
-     * Após isso, cada uma linha com o nome da cidade e a seguinte com a cidade 
-     * adjacente e o peso da ligaç?o(de voo) separada por espaço.
+     * contï¿½m o nome da companhia aï¿½rea. Cada linha contï¿½m o nome da cidade.
+     * Apï¿½s isso, cada uma linha com o nome da cidade e a seguinte com a cidade
+     * adjacente e o peso da ligaï¿½?o(de voo) separada por espaï¿½o.
      *
      * @param nomeArquivo - nome do arquivo
      * @throws IOException
      */
-    public static void importarArquivoCompanhia(String nomeArquivo) throws IOException, NotVerticeException{
-        Companhia companhia = f.cadastrarCompanhia(nomeArquivo);//Companhia recebe o nome da Companhia
-        try (BufferedReader ler = new BufferedReader(new FileReader(nomeArquivo+".txt")) //fecha o arquivo
+    public static void importarArquivoCompanhia(String nomeArquivo) throws IOException, NotVerticeException {
+        Companhia companhia = f.cadastrarCompanhia(nomeArquivo);// Companhia recebe o nome da Companhia
+        try (BufferedReader ler = new BufferedReader(new FileReader(nomeArquivo + ".txt")) // fecha o arquivo
         ) {
             String nomeAresta, linha;
             Aeroporto origem1;
-            linha = ler.readLine(); //lê a linha e armazena na string
+            linha = ler.readLine(); // lï¿½ a linha e armazena na string
             String[] header = linha.split(" ");
 
-            linha = ler.readLine();//lê a proxima linha
-            while (linha != null) { //enquanto n?o for o fim do arquivo
-                origem1 = f.getAeroporto(linha); //a linha lida é o cidade
-                linha = ler.readLine();//lê a proxima linha
-                String[] adjacencia = linha.split(" ");//separa em partes
-                for (int i = 0; i < adjacencia.length; i = i + 4) {//Até o fim do vetor
-                    Aeroporto destino2 = f.getAeroporto(adjacencia[i]); //indica o segundo cidade
-                    double tempo = Double.parseDouble(adjacencia[i + 1]); //converte para int a string
-                    double preco = Double.parseDouble(adjacencia[i + 2]); //converte para int a string
-                    int passageiros = Integer.parseInt(adjacencia[i + 3]); //converte para int a string
-                    
-                    f.cadastrarVoo(origem1, destino2, passageiros, preco, companhia, tempo); //adiciona a aresta no grafo.
+            linha = ler.readLine();// lï¿½ a proxima linha
+            while (linha != null) { // enquanto n?o for o fim do arquivo
+                origem1 = f.getAeroporto(linha); // a linha lida ï¿½ o cidade
+                linha = ler.readLine();// lï¿½ a proxima linha
+                String[] adjacencia = linha.split(" ");// separa em partes
+                for (int i = 0; i < adjacencia.length; i = i + 4) {// Atï¿½ o fim do vetor
+                    Aeroporto destino2 = f.getAeroporto(adjacencia[i]); // indica o segundo cidade
+                    double tempo = Double.parseDouble(adjacencia[i + 1]); // converte para int a string
+                    double preco = Double.parseDouble(adjacencia[i + 2]); // converte para int a string
+                    int passageiros = Integer.parseInt(adjacencia[i + 3]); // converte para int a string
+
+                    f.cadastrarVoo(origem1, destino2, passageiros, preco, companhia, tempo); // adiciona a aresta no
+                                                                                             // grafo.
                 }
                 linha = ler.readLine();
             }
@@ -167,5 +166,5 @@ public class Server {
             throw new IOException();
         }
     }
-    
+
 }

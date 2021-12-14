@@ -47,6 +47,7 @@ module.exports = configure(function(ctx) {
             vueRouterMode: 'hash', // available values: 'hash', 'history'
             env: {
                 NAME: "Azul",
+                ID: 0,
                 BASE_URL: "http://localhost:8001/"
             },
             // transpile: false,
@@ -97,7 +98,7 @@ module.exports = configure(function(ctx) {
             // directives: [],
 
             // Quasar plugins
-            plugins: []
+            plugins: ['Notify']
         },
 
         // animations: 'all', // --- includes all animations

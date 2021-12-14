@@ -90,7 +90,7 @@ public class Facade {
        return controladorDeVoos.getAeroporto(nome);
     }
     
-    public Companhia getCompanhia(String nome) throws NotVerticeException{
+    public Companhia getCompanhia(int nome) throws NotVerticeException{
        return controllerUsuarios.getCompanhia(nome);
     }
     

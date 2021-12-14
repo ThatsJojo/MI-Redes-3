@@ -1,0 +1,8 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "Companhia/gson-2.8.2.jar",
+        "Companhia/hamcrest-core-1.3.jar",
+        "Companhia/junit-4.12.jar"
+    ]
+}
