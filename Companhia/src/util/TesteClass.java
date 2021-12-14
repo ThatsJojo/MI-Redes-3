@@ -40,4 +40,14 @@ public class TesteClass<V> implements Aresta{
     public boolean able() {
         return true;
     }
+
+    @Override
+    public void up() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void down() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

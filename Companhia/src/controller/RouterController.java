@@ -16,6 +16,8 @@ package controller;
 
 import com.google.gson.Gson;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import routes.CadastrarVooRouter;
 import routes.EffectiveBuyRouter;
 import routes.PurchaseRouter;
@@ -29,7 +31,7 @@ public class RouterController {
     private Router route;
     public static int contadorLamport = 0;
 
-    public Object[] router(String url, String method, String body, HashMap data_base) {
+    public Object[] router(Map<String, List> cabecalhos, String url, String method, String body, HashMap data_base) {
         System.out.println(url);
         try {
             String[] urlSplit = url.split("\\?");
@@ -74,6 +76,9 @@ public class RouterController {
             }
             if (path.equals("/reserve")) {
                 route = new ReserveRouter();
+                ((ReserveRouter)route).setREQLogicCounter(Integer.parseInt((String) cabecalhos.get("Logic-Counter").get(0)));
+                
+                ;
                 if (method.equals("POST")) {
                     return route.POST(body, data_base);
                 } else if (method.equals("PUT")) {
@@ -127,7 +132,7 @@ public class RouterController {
             String[] responseNotFoud = {"404", "Not found", ""};
             return responseNotFoud;
         } catch (Exception e) {
-            String[] responseNotFoud = {"404", "Not found", ""};
+            String[] responseNotFoud = {"500", "Internal ERROR", ""};
             return responseNotFoud;
         }
     }

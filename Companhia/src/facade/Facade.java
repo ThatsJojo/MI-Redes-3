@@ -66,12 +66,24 @@ public class Facade {
         return controladorDeVoos.criarPassagem(new Passageiro(nome), controladorDeVoos.getVoo(idVoo));
     }
     
+    public void reservarVoo(ArrayList<Double>ids, String nome) throws NotPassException{
+        for(Double i: ids){
+            System.out.println("cOMPRANDO");
+            comprarPorID((int)i.byteValue(), nome);
+        }
+    }
+    
     public void devolverPassagem(Passagem p, int idViagemAtual){
         controladorDeVoos.devolverPassagem(p, idViagemAtual);
     }
     
     public ArrayList<Voo> getVoos(Aeroporto a1, Aeroporto a2) throws NotVerticeException, NotVooException{
         return controladorDeVoos.getVoos(a1, a2);
+    }
+    
+    public boolean isVooCheio(int vooID){
+        return controladorDeVoos.getVoo(vooID).isCheio();
+        
     }
     
     public Voo cadastrarVoo(Aeroporto a1, Aeroporto a2, int numeroDePassageiros, double precoBase, Companhia companhia, double tempoBase) throws NotVerticeException{

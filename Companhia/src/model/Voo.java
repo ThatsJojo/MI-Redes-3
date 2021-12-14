@@ -10,6 +10,7 @@ public class Voo implements Aresta<Aeroporto>{
     private final Aeroporto destino;
     private int id; 
     private int numeroDePassageiros;
+    private int passaagensVendidas;
     private final HashMap<Integer, Passageiro> passageiros;
     private final HashMap<Integer, Passagem> passagens;
     private final double precoBase;
@@ -32,6 +33,7 @@ public class Voo implements Aresta<Aeroporto>{
             this.passagens = new HashMap();
             this.precoBase = precoBase;
             this.tempoBase = tempoBase;
+            this.passaagensVendidas = 0;
     }
 
     @Override
@@ -49,7 +51,7 @@ public class Voo implements Aresta<Aeroporto>{
     }
     
     public boolean isCheio(){
-        return cheio;
+        return numeroDePassageiros>passaagensVendidas;
     }
     
     public int getId() {
@@ -138,6 +140,16 @@ public class Voo implements Aresta<Aeroporto>{
     @Override
     public boolean able() {
         return !cheio;
+    }
+
+    @Override
+    public void up() {
+        this.passaagensVendidas++;
+    }
+
+    @Override
+    public void down() {
+        this.passaagensVendidas--;
     }
     
 }

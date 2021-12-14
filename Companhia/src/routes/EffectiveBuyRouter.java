@@ -32,7 +32,6 @@ public class EffectiveBuyRouter implements Router {
             Object[] response = {"500", "ERRO", ex.getMessage()};
             return response;
         }
-
     }
 
     @Override

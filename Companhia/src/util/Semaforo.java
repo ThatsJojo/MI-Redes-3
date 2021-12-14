@@ -28,6 +28,7 @@ public class Semaforo{
         int flag = resources.get(A);
         if(resources.get(A)>0){
             resources.replace(A, resources.get(A)-1);
+            A.down();
             //System.out.println("Flag antes: "+flag+"   flag depois: "+ resources.get(A));
             return true;
         }
@@ -37,6 +38,7 @@ public class Semaforo{
     public synchronized void up(Aresta A){
         Integer flag = resources.get(A);
         resources.replace(A, resources.get(A)+1);
+        A.up();
     }
     
 }

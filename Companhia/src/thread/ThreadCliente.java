@@ -87,7 +87,7 @@ public class ThreadCliente extends Thread {
                 resposta = new RespostaHTTP(requisicao.getProtocolo(), "100", "OK");
                 //se o caminho foi igual a / entao deve pegar o /index.html
                 RouterController routerController = new RouterController();
-                Object[] res = routerController.router(requisicao.getRecurso(), requisicao.getMetodo(), requisicao.getBody(), data_base_ref);
+                Object[] res = routerController.router(requisicao.getCabecalhos(), requisicao.getRecurso(), requisicao.getMetodo(), requisicao.getBody(), data_base_ref);
                 if (res != null) {
                     System.out.println(res[0].toString());
                     System.out.println(res[1].toString());
