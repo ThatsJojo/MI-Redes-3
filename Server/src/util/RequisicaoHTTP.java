@@ -63,23 +63,24 @@ public class RequisicaoHTTP {
         }
         requisicao.body = "";
         int pilha = 0;  //Stack auxiliar
-        String line;
+        char line;
         do{
             if(!buffer.ready())
                 break;
-            line = buffer.readLine();
+            line = (char)buffer.read();
 
-            if(line == null || line.isEmpty()){
+            if(line == 0){
                 pilha = 0;
             }
-            else if(line.charAt(0) == '{'){
+            else if(line == '{'){
                 pilha++;
             }
-            else if(line.charAt(0) == '}'){
+            else if(line == '}'){
                 pilha--;
             }
-            requisicao.body = requisicao.body + line;            
-        }while(pilha != 0);
+            requisicao.body = requisicao.body + line; 
+        }while(pilha != 0 && requisicao.body.length() < Integer.parseInt((String) requisicao.getCabecalhos().get("Content-Length").get(0)));
+        System.out.println(requisicao.body);
         //se existir a chave Connection no cabeçalho
         if (requisicao.getCabecalhos().containsKey("Connection")) {
             //seta o manter viva a conexao se o connection for keep-alive

@@ -9,6 +9,7 @@ import Exceptions.NotVerticeException;
 import com.google.gson.Gson;
 import facade.Facade;
 import java.util.HashMap;
+import util.RespostaHTTP;
 
 /**
  * Rota para cadastrar Voos de outras companhias no servidor atual.
@@ -18,7 +19,7 @@ import java.util.HashMap;
 public class CadastrarVooRouter implements Router {
 
     @Override
-    public Object[] GET(Object body, HashMap data_base) {
+    public Object[] GET(Object body, RespostaHTTP data_base) {
         Facade f = Facade.getInstance();
         Gson gson = new Gson();
         HashMap<String, String> entries = gson.fromJson((String) body, HashMap.class);
@@ -38,17 +39,17 @@ public class CadastrarVooRouter implements Router {
     }
 
     @Override
-    public Object[] POST(Object body, HashMap data_base) {
+    public Object[] POST(Object body, RespostaHTTP data_base) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object[] PUT(Object body, HashMap data_base) {
+    public Object[] PUT(Object body, RespostaHTTP data_base) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object[] DELETE(Object body, HashMap data_base) {
+    public Object[] DELETE(Object body, RespostaHTTP data_base) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

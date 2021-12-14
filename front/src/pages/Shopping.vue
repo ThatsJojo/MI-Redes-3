@@ -200,19 +200,13 @@
           });
       },
       buy() {
-        let voos = convertArrayToObject(
-          this.tickets,
-          (item, index) => 'voo' + index,
-          (item) => item.id,
-        );
+        let voos = this.tickets.map((ticket) => ticket.id);
         this.$api
-          .get('/reserve', {
-            params: {
-              comprar: 1,
-              tamanho: this.tickets.length,
-              nome: this.nome,
-              ...voos,
-            },
+          .post('/purchase', {
+            comprar: 1,
+            tamanho: this.tickets.length,
+            nome: this.nome,
+            voos,
           })
           .then((response) => {
             this.searchRoutes(this.placeAt, this.placeFrom);

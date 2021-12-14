@@ -25,13 +25,15 @@ import routes.ReserveRouter;
 import routes.Router;
 import routes.TicketRouter;
 import routes.WayRouter;
+import thread.ThreadCliente;
+import util.RespostaHTTP;
 
 public class RouterController {
 
     private Router route;
     public static int contadorLamport = 0;
 
-    public Object[] router(Map<String, List> cabecalhos, String url, String method, String body, HashMap data_base) {
+    public Object[] router(Map<String, List> cabecalhos, String url, String method, String body, HashMap data_base, RespostaHTTP resposta) {
         System.out.println(url);
         try {
             String[] urlSplit = url.split("\\?");
@@ -53,25 +55,25 @@ public class RouterController {
             if (path.equals("/ticket")) {
                 route = new TicketRouter();
                 if (method.equals("POST")) {
-                    return route.POST(body, data_base);
+                    return route.POST(body, resposta);
                 } else if (method.equals("PUT")) {
-                    return route.PUT(body, data_base);
+                    return route.PUT(body, resposta);
                 } else if (method.equals("GET")) {
-                    return route.GET(queryParams, data_base);
+                    return route.GET(queryParams, resposta);
                 } else if (method.equals("DELETE")) {
-                    return route.DELETE(queryParams, data_base);
+                    return route.DELETE(queryParams, resposta);
                 }
             }
             if (path.equals("/caminho")) {
                 route = new WayRouter();
                 if (method.equals("POST")) {
-                    return route.POST(body, data_base);
+                    return route.POST(body, resposta);
                 } else if (method.equals("PUT")) {
-                    return route.PUT(body, data_base);
+                    return route.PUT(body, resposta);
                 } else if (method.equals("GET")) {
-                    return route.GET(queryParams, data_base);
+                    return route.GET(queryParams, resposta);
                 } else if (method.equals("DELETE")) {
-                    return route.DELETE(queryParams, data_base);
+                    return route.DELETE(queryParams, resposta);
                 }
             }
             if (path.equals("/reserve")) {
@@ -84,37 +86,39 @@ public class RouterController {
                 }
                 ((ReserveRouter)route).setREQLogicCounter(count);
                 if (method.equals("POST")) {
-                    return route.POST(body, data_base);
+                    return route.POST(body, resposta);
                 } else if (method.equals("PUT")) {
-                    return route.PUT(body, data_base);
+                    return route.PUT(body, resposta);
                 } else if (method.equals("GET")) {
-                    return route.GET(queryParams, data_base);
+                    return route.GET(queryParams, resposta);
                 } else if (method.equals("DELETE")) {
-                    return route.DELETE(queryParams, data_base);
+                    return route.DELETE(queryParams, resposta);
                 }
             }
             if (path.equals("/purchase")) {
                 route = new PurchaseRouter();
                 if (method.equals("POST")) {
-                    return route.POST(body, data_base);
+                    return route.POST(body, resposta);
                 } else if (method.equals("PUT")) {
-                    return route.PUT(body, data_base);
+                    return route.PUT(body, resposta);
                 } else if (method.equals("GET")) {
-                    return route.GET(queryParams, data_base);
+                    return route.GET(queryParams, resposta);
                 } else if (method.equals("DELETE")) {
-                    return route.DELETE(queryParams, data_base);
+                    return route.DELETE(queryParams, resposta);
+                }else if(method.equals("OPTIONS")){
+                    return ((PurchaseRouter)route).OPTIONS(queryParams, resposta);
                 }
             }
             if (path.equals("/buy")) {
                 route = new EffectiveBuyRouter();
                 if (method.equals("POST")) {
-                    return route.POST(body, data_base);
+                    return route.POST(body, resposta);
                 } else if (method.equals("PUT")) {
-                    return route.PUT(body, data_base);
+                    return route.PUT(body, resposta);
                 } else if (method.equals("GET")) {
-                    return route.GET(queryParams, data_base);
+                    return route.GET(queryParams, resposta);
                 } else if (method.equals("DELETE")) {
-                    return route.DELETE(queryParams, data_base);
+                    return route.DELETE(queryParams, resposta);
                 }
             }
             if (path.equals("/addVoo")) {
@@ -122,14 +126,14 @@ public class RouterController {
                 route = new CadastrarVooRouter();
                 if (method.equals("POST")) {
                     System.out.println("POST");
-                    return route.POST(body, data_base);
+                    return route.POST(body, resposta);
                 } else if (method.equals("PUT")) {
-                    return route.PUT(body, data_base);
+                    return route.PUT(body, resposta);
                 } else if (method.equals("GET")) {
                     System.out.println("GET");
-                    return route.GET(queryParams, data_base);
+                    return route.GET(queryParams, resposta);
                 } else if (method.equals("DELETE")) {
-                    return route.DELETE(queryParams, data_base);
+                    return route.DELETE(queryParams, resposta);
                 }
             }
 

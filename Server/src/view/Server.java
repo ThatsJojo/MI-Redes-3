@@ -59,7 +59,7 @@ public class Server {
 
             while (true) {
                 Socket clie = serv.accept();
-                System.out.println(clie.getInetAddress().getHostAddress());
+                System.out.println("Cli:"+clie.getInetAddress().getHostAddress());
                 // Inicia thread do cliente
 
                 new ThreadCliente(clie, data_base).start();

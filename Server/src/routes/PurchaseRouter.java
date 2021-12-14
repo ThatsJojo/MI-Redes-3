@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import util.RespostaHTTP;
 import view.Server;
 
 /**
@@ -31,7 +32,7 @@ import view.Server;
 public class PurchaseRouter implements Router {
 
     @Override
-    public Object[] GET(Object body, HashMap data_base) {
+    public Object[] GET(Object body, RespostaHTTP data_base) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -55,12 +56,7 @@ public class PurchaseRouter implements Router {
                 connection.addRequestProperty("Logic-Counter", "" + RouterController.contadorLamport);
                 connection.setRequestMethod("GET");
                 connection.connect();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String line;
-                while ((line = reader.readLine()) != null) {
-                    System.out.println("client read " + line);
-                }
-                reader.close();
                 int responseCode = connection.getResponseCode();
                 if (responseCode != 200) {
                     throw new NotPassException();
@@ -74,7 +70,7 @@ public class PurchaseRouter implements Router {
     
 
     @Override
-    public Object[] POST(Object body, HashMap data_base) {
+    public Object[] POST(Object body, RespostaHTTP data_base) {
         Facade f = Facade.getInstance();
         Gson gson = new Gson();
 
@@ -95,13 +91,18 @@ public class PurchaseRouter implements Router {
     }
 
     @Override
-    public Object[] PUT(Object body, HashMap data_base) {
+    public Object[] PUT(Object body, RespostaHTTP data_base) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object[] DELETE(Object body, HashMap data_base) {
+    public Object[] DELETE(Object body, RespostaHTTP data_base) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Object[] OPTIONS(String queryParams, RespostaHTTP resposta) {
+        Object[] response = {"204", "OK", ""};
+        return response;
     }
 
 }

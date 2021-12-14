@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import util.RespostaHTTP;
 
 /**
  * Rota para receber as reservas de passagen requisitadas por outros servidores.
@@ -31,7 +32,7 @@ public class ReserveRouter implements Router {
     }
 
     @Override
-    public Object[] GET(Object body, HashMap data_base) {
+    public Object[] GET(Object body, RespostaHTTP data_base) {
         Facade f = Facade.getInstance();
         Gson gson = new Gson();
         HashMap<String, String> entries = gson.fromJson((String) body, HashMap.class);
@@ -70,17 +71,17 @@ public class ReserveRouter implements Router {
     }
 
     @Override
-    public Object[] POST(Object body, HashMap data_base) {
+    public Object[] POST(Object body, RespostaHTTP data_base) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object[] PUT(Object body, HashMap data_base) {
+    public Object[] PUT(Object body, RespostaHTTP data_base) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object[] DELETE(Object body, HashMap data_base) {
+    public Object[] DELETE(Object body, RespostaHTTP data_base) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
