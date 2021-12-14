@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -11,8 +12,8 @@ public class Voo implements Aresta<Aeroporto>{
     private int id; 
     private int numeroDePassageiros;
     private int passaagensVendidas;
-    private final HashMap<Integer, Passageiro> passageiros;
-    private final HashMap<Integer, Passagem> passagens;
+    private transient final ArrayList<Passageiro> passageiros;
+    private transient final ArrayList<Passagem> passagens;
     private final double precoBase;
     private final double tempoBase;
     private final Companhia companhia;
@@ -29,8 +30,8 @@ public class Voo implements Aresta<Aeroporto>{
             this.destino = destino;
             this.id = Voo.getID();
             this.numeroDePassageiros = numeroDePassageiros;
-            this.passageiros = new HashMap();
-            this.passagens = new HashMap();
+            this.passageiros = new ArrayList();
+            this.passagens = new ArrayList();
             this.precoBase = precoBase;
             this.tempoBase = tempoBase;
             this.passaagensVendidas = 0;
@@ -70,21 +71,21 @@ public class Voo implements Aresta<Aeroporto>{
             this.numeroDePassageiros = numeroDePassageiros;
     }
 
-    public HashMap<Integer, Passageiro> getPassageiros() {
+    public ArrayList<Passageiro> getPassageiros() {
             return passageiros;
     }
 
     public void cadastrarPassageiro(Passageiro e){
-        passageiros.put(e.getIdPassageiro(), e);
+        passageiros.add(e);
         cheio = passageiros.size()==numeroDePassageiros;
     }
 
-    public HashMap<Integer, Passagem> getPassagens() {
+    public ArrayList<Passagem> getPassagens() {
             return passagens;
     }
 
     public void cadastrarPassagem(Passagem p){
-        passagens.put(p.getId(), p);
+        passagens.add( p);
     }
 
     public double getPrecoBase() {
@@ -128,13 +129,12 @@ public class Voo implements Aresta<Aeroporto>{
 
     public void removerPassgaem(Passagem p, int idViagemAtual) {
         passageiros.remove(p.getPassageiro().getIdPassageiro());
-        p.getPassageiro().getViagens(idViagemAtual).removePassagem(p);
         passagens.remove(p.getId());
     }
 
     @Override
     public String toString() {
-        return "Voo{" + "origem=" + origem + ", destino=" + destino + ", id=" + id + ", nPassageiros=" + numeroDePassageiros + '}';
+        return "{" + "origem=" + origem + ", destino=" + destino + ", id=" + id + ", nPassageiros=" + numeroDePassageiros + '}';
     }
 
     @Override

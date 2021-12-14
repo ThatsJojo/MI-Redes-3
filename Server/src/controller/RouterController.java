@@ -76,9 +76,13 @@ public class RouterController {
             }
             if (path.equals("/reserve")) {
                 route = new ReserveRouter();
-                ((ReserveRouter)route).setREQLogicCounter(Integer.parseInt((String) cabecalhos.get("Logic-Counter").get(0)));
-                
-                ;
+                int count;
+                if(cabecalhos.get("Logic-Counter") == null){
+                    count = RouterController.contadorLamport;
+                }else{
+                    count = Integer.parseInt((String) cabecalhos.get("Logic-Counter").get(0));
+                }
+                ((ReserveRouter)route).setREQLogicCounter(count);
                 if (method.equals("POST")) {
                     return route.POST(body, data_base);
                 } else if (method.equals("PUT")) {

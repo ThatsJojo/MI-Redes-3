@@ -49,7 +49,9 @@
           <text
             class="q-mx-sm"
           >Tempo total: {{tickets.reduce((carry, e)=> e.tempoBase + carry, 0)}} Horas</text>
-          <q-btn label="Comprar" color="positive"></q-btn>
+          <q-input bottom-slots v-model="nome" label="Nome comprador" />
+
+          <q-btn label="Comprar" color="positive" @click="buy"></q-btn>
         </q-toolbar>
         <div class="row">
           <q-card class="col-3 my-card p-pa-lg" v-for="ticket, index in tickets" :key="index">
@@ -136,6 +138,8 @@
               <q-item-section>
                 <q-item-label>Tempo: {{ticket.tempoBase}} horas</q-item-label>
                 <q-item-label>Preço: {{ticket.precoBase}} R$</q-item-label>
+                <q-item-label>Passagens: {{ticket.numeroDePassageiros}}</q-item-label>
+                <q-item-label>Passagens Vendidas: {{Math.abs(ticket.passaagensVendidas)}}</q-item-label>
               </q-item-section>
             </q-item>
           </q-list>
@@ -148,6 +152,7 @@
 </template>
 
 <script>
+  import { convertArrayToObject } from '../utils/functions';
   export default {
     // name: 'PageName',
     data() {
@@ -158,6 +163,7 @@
         tickets: [],
         tempTickets: [],
         addTicket: false,
+        nome: '',
       };
     },
     methods: {
@@ -191,6 +197,35 @@
           .then((response) => {
             this.addTicket = true;
             this.tempTickets = response.data;
+          });
+      },
+      buy() {
+        let voos = convertArrayToObject(
+          this.tickets,
+          (item, index) => 'voo' + index,
+          (item) => item.id,
+        );
+        this.$api
+          .get('/reserve', {
+            params: {
+              comprar: 1,
+              tamanho: this.tickets.length,
+              nome: this.nome,
+              ...voos,
+            },
+          })
+          .then((response) => {
+            this.searchRoutes(this.placeAt, this.placeFrom);
+            this.$q.notify({
+              message: 'Passagem comprada',
+              color: 'primary',
+            });
+          })
+          .catch((error) => {
+            this.$q.notify({
+              message: 'Não foi possivel realizar compra',
+              color: 'negative',
+            });
           });
       },
     },

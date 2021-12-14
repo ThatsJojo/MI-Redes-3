@@ -37,10 +37,13 @@ public class ReserveRouter implements Router {
         HashMap<String, String> entries = gson.fromJson((String) body, HashMap.class);
         int tamanho = Integer.parseInt(entries.get("tamanho"));
         boolean comprar = entries.get("comprar").equals("1");
-        ArrayList<Integer> voosID = new ArrayList();
+        ArrayList<Integer> voosID = new ArrayList(tamanho);
+
         for (int i = 0; i < tamanho; i++) {
-            voosID.set(i, Integer.parseInt(entries.get("voo" + i)));
+            voosID.add(i, Integer.parseInt(entries.get("voo" + i)));
+            System.out.println( Integer.parseInt(entries.get("voo" + i)));
         }
+
         Object[] response = {"500", "ERRO!", "N?o foi possível realizar a reserva dos acentos."};
         if (comprar) {
             try {

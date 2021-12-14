@@ -7,6 +7,7 @@ package routes;
 import Exceptions.NotVerticeException;
 import Exceptions.NotVooException;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import controller.RouterController;
 import facade.Facade;
 import java.io.BufferedReader;
@@ -17,6 +18,7 @@ import java.net.URL;
 import java.util.HashMap;
 import model.Voo;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Aeroporto;
@@ -33,15 +35,22 @@ public class TicketRouter implements Router{
         Facade f = Facade.getInstance();
         ArrayList<Voo> list = null;
         Gson gson = new Gson();
+        String json = "[";    
         HashMap<String, String> entries = gson.fromJson((String) body, HashMap.class);
         try{
                 list = f.getVoos(f.getAeroporto(entries.get("origem")), f.getAeroporto(entries.get("destino")));
-                 
+                Iterator it = list.iterator();
+                while(it.hasNext()){
+                    json = json + gson.toJson(it.next());
+                    if(it.hasNext())
+                        json = json + ",";
+                }
+          
+            json = json + "]"; 
         }catch(Exception e){
             
         }
-        String result =gson.toJson(list);
-        Object[] response = {"200", "OK", result};
+        Object[] response = {"200", "OK", json};
         return response;
     }
 
