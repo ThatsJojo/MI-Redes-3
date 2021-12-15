@@ -203,7 +203,7 @@
         let voos = this.tickets.map((ticket) => ticket.id);
         this.$api
           .post('/purchase', {
-            comprar: 1,
+            comprar: 0,
             tamanho: this.tickets.length,
             nome: this.nome,
             voos,

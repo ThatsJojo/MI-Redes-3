@@ -52,7 +52,10 @@ public class Voo implements Aresta<Aeroporto>{
     }
     
     public boolean isCheio(){
-        return numeroDePassageiros>passaagensVendidas;
+        return numeroDePassageiros<=passaagensVendidas;
+    }
+    public boolean hasOneTicket(){
+        return numeroDePassageiros - passaagensVendidas == 1;
     }
     
     public int getId() {
@@ -144,12 +147,12 @@ public class Voo implements Aresta<Aeroporto>{
 
     @Override
     public void up() {
-        this.passaagensVendidas++;
+        this.passaagensVendidas--;
     }
 
     @Override
     public void down() {
-        this.passaagensVendidas--;
+        this.passaagensVendidas++;
     }
     
 }

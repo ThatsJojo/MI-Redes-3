@@ -86,6 +86,10 @@ public class Facade {
         
     }
     
+    public boolean hasOneTicket(int vooID){
+        return controladorDeVoos.getVoo(vooID).hasOneTicket();
+    }
+    
     public Voo cadastrarVoo(Aeroporto a1, Aeroporto a2, int numeroDePassageiros, double precoBase, Companhia companhia, double tempoBase) throws NotVerticeException{
         return controladorDeVoos.cadastrarVoo(a1, a2, numeroDePassageiros, precoBase, companhia, tempoBase);
     }

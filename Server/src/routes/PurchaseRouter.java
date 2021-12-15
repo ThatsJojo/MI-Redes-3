@@ -41,13 +41,14 @@ public class PurchaseRouter implements Router {
                 
         for (Map.Entry<String, String> set : Server.knownServer.entrySet()) {
             try {
-                URL url = new URL(set.getValue() + "/reserve");
                 String params = "?comprar="+comprar+"&nome="+ nome +"&tamanho=" + voos.size();
-                int vid;
+                int vooId;
                 for (int i = 0; i < voos.size(); i++) {
-                    vid = (int) voos.get(i).byteValue();
-                    params += "&voo" + vid + "=" + vid;
+                    vooId = (int) voos.get(i).byteValue();
+                    params += "&voo" + i + "=" + vooId;
                 }
+                URL url = new URL(set.getValue() + "/reserve"+params);
+
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.addRequestProperty("Accept", "*/*");
                 connection.addRequestProperty("Content-Type", "application/json");
@@ -80,7 +81,6 @@ public class PurchaseRouter implements Router {
         try {
             requisitarCompra(ids, false, nome);
             requisitarCompra(ids, true, nome);
-            f.reservarVoo(ids, (String) param.get("nome"));
         } catch (NotPassException ex) {
             Object[] response = {"500", "ERRO", ex.getMessage()};
             return response;

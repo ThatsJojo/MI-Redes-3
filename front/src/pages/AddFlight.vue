@@ -82,6 +82,7 @@
         this.$api
           .get('/addVoo', {
             params: {
+              resend: true,
               origem: this.origem,
               destino: this.destino,
               nPassageiros: this.nPassageiros,

@@ -22,8 +22,8 @@ import util.RespostaHTTP;
 public class ReserveRouter implements Router {
 
     private Integer REQLogicCounter;
-    private static HashMap<Integer, Integer> mapaRecursos;
-    private int waitTimeConcurrentREQ = 50;
+    private static HashMap<Integer, Integer> mapaRecursos = new HashMap();
+    private int waitTimeConcurrentREQ = 500;
     //identifica o último contador lógico utilizado para um dado recurso (chave = recurso, valor = contador).
 
     public void setREQLogicCounter(Integer REQLogicCounter) {
@@ -37,18 +37,18 @@ public class ReserveRouter implements Router {
         Gson gson = new Gson();
         HashMap<String, String> entries = gson.fromJson((String) body, HashMap.class);
         int tamanho = Integer.parseInt(entries.get("tamanho"));
-        boolean comprar = entries.get("comprar").equals("1");
-        ArrayList<Integer> voosID = new ArrayList(tamanho);
-
+        boolean comprar = entries.get("comprar").equals("true");
+        ArrayList<Double> voosID = new ArrayList(tamanho);
+        
         for (int i = 0; i < tamanho; i++) {
-            voosID.add(i, Integer.parseInt(entries.get("voo" + i)));
-            System.out.println( Integer.parseInt(entries.get("voo" + i)));
+            voosID.add(i, Double.parseDouble(entries.get("voo" + i)));
         }
 
         Object[] response = {"500", "ERRO!", "N?o foi possível realizar a reserva dos acentos."};
         if (comprar) {
+            System.out.println("Comprar");
             try {
-                comprar(voosID, f, entries.get("nome"));
+                f.reservarVoo(voosID, entries.get("nome"));
                 Object[] r1 = {"200", "OK", "Compra de passagem para os trechos indicados realizada com sucesso!"};
                 response = r1;
 
@@ -57,7 +57,10 @@ public class ReserveRouter implements Router {
                 response = r1;
             }
         } else if (REQLogicCounter != null) {
+            System.out.println("Solicitar ");
+            
             boolean autorizado = autorizarCompra(voosID, f);
+            System.out.println("Depois de pedir autorizacao");
             if (autorizado) {
                 Object[] r1 = {"200", "OK", "Compra de passagem para os trechos indicados realizada com sucesso!"};
                 response = r1;
@@ -91,15 +94,20 @@ public class ReserveRouter implements Router {
         }
     }
 
-    private boolean autorizarCompra(ArrayList<Integer> voosID, Facade f) {
-        for (Integer i : voosID) {
-            attMapaRecursos(i, REQLogicCounter);//Atualiza o mapa de recursos.
+    private boolean autorizarCompra(ArrayList<Double> voosID, Facade f) {
+        for (Double i : voosID) {
+            int id = (int)i.byteValue();
+            attMapaRecursos(id, REQLogicCounter);//Atualiza o mapa de recursos.
             try {
                 Thread.sleep(waitTimeConcurrentREQ);
             } catch (InterruptedException ex) {
                 Logger.getLogger(ReserveRouter.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (f.isVooCheio(i) || recursoReservado(i, REQLogicCounter)) {
+            if(!f.hasOneTicket(id) && !f.isVooCheio(id)){
+                return true;
+            }
+        
+            else if (f.isVooCheio(id) || recursoReservado(id, REQLogicCounter)) {
                 return false;
             }
         }
@@ -121,11 +129,7 @@ public class ReserveRouter implements Router {
 
     static synchronized private boolean recursoReservado(Integer i, int REQCounter) {
         Integer ultimoContador = mapaRecursos.get(i);
-        if (ultimoContador.compareTo(REQCounter) == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return ultimoContador.compareTo(REQCounter) != 0;
     }
 
 }
