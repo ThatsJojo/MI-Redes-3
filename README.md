@@ -10,9 +10,9 @@ Esse projeto repositório contém o projeto da interface e do servidor.
 
 - Node >=12.22.1
 - NPM >=6.14.12 
-- Apache Maven 3.8.2
-- Apache Netbeans 12.4 
-- Java version: 1.8.0_292
+- Apache Maven 3.8.2 - Opcional (Caso queira rodar o servidor)
+- Apache Netbeans 12.4 - Opcional (Caso queira rodar o servidor)
+- Java version: 1.8.0_292 - Opcional (Caso queira rodar o servidor)
 
 ## 🖥️  Instalar dependências
 
