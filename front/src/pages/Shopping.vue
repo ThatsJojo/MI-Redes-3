@@ -80,12 +80,7 @@
                 </q-item-section>
               </q-item>
             </q-list>
-            <q-btn
-              color="negative"
-              class="q-ma-md"
-              label="Remover"
-              @click="()=> tickets = tickets.filter((e)=> e.id != ticket.id)"
-            />
+            <q-btn color="negative" class="q-ma-md" label="Remover" @click="remove(ticket)" />
             <q-separator />
           </q-card>
         </div>
@@ -96,7 +91,10 @@
           <q-toolbar-title>Caminhos</q-toolbar-title>
         </q-toolbar>
         <q-item v-for="way,index in ways" :key="index">
-          <q-card class="row full-width content-center align-center q-pa-md">
+          <q-card
+            class="row full-width content-center align-center q-pa-md"
+            :class="{'bg-blue-grey-3': tickets.length > 0 && indexCard!= null && indexCard !=index}"
+          >
             <text class="text-weight-bold q-ma-md">Opçao {{index +1}}:</text>
             <div
               class="row content-center align-center"
@@ -108,7 +106,8 @@
                 v-if="indexAirport < way.length -1"
                 icon="flight_takeoff"
                 rounded
-                @click="getFlights(airport.nome, way[indexAirport +1].nome)"
+                :disable="tickets.length > 0 && indexCard!= null && indexCard !=index"
+                @click="getFlights(airport.nome, way[indexAirport +1].nome, index, way)"
               ></q-btn>
             </div>
           </q-card>
@@ -162,6 +161,10 @@
         ways: [],
         tickets: [],
         tempTickets: [],
+        tempIndexCard: null,
+        tempWay: null,
+        way: null,
+        indexCard: null,
         addTicket: false,
         nome: '',
       };
@@ -169,6 +172,7 @@
     methods: {
       searchRoutes() {
         this.tickets = [];
+        this.$q.loading.show();
         this.$api
           .get('/caminho', {
             params: { origem: this.placeFrom, destino: this.placeAt },
@@ -176,9 +180,14 @@
           .then((response) => {
             console.log(response);
             this.ways = response.data;
+          })
+          .finally(() => {
+            this.$q.loading.hide();
           });
       },
       pushTicket(ticket) {
+        this.indexCard = this.tempIndexCard;
+        this.way = this.tempWay;
         let exist = this.tickets.find((element) => {
           return element.id == ticket.id;
         });
@@ -189,38 +198,70 @@
 
         console.log(this.tickets);
       },
-      getFlights(origem, destino) {
+      remove(ticket) {
+        this.tickets = this.tickets.filter((e) => e.id != ticket.id);
+        if (this.tickets.length == 0) {
+          this.indexCard = null;
+        }
+      },
+      getFlights(origem, destino, indexCard, way) {
+        this.$q.loading.show();
+
         this.$api
           .get('/ticket', {
             params: { origem, destino },
           })
           .then((response) => {
             this.addTicket = true;
+            this.tempWay = way;
+            this.tempIndexCard = indexCard;
             this.tempTickets = response.data;
+          })
+          .finally(() => {
+            this.$q.loading.hide();
           });
       },
       buy() {
         let voos = this.tickets.map((ticket) => ticket.id);
-        this.$api
-          .post('/purchase', {
-            comprar: 0,
-            tamanho: this.tickets.length,
-            nome: this.nome,
-            voos,
-          })
-          .then((response) => {
-            this.searchRoutes(this.placeAt, this.placeFrom);
-            this.$q.notify({
-              message: 'Passagem comprada',
-              color: 'primary',
-            });
-          })
-          .catch((error) => {
-            this.$q.notify({
-              message: 'Não foi possivel realizar compra',
-              color: 'negative',
-            });
+        if (this.nome.length == 0) {
+          this.$q.notify({
+            message: 'Informe o nome',
+            color: 'negative',
           });
+        }
+        console.log(JSON.stringify(this.way));
+        if (this.way == null || this.way.length - 1 != this.tickets.length) {
+          this.$q.notify({
+            message: 'Caminho incompleto',
+            color: 'negative',
+          });
+        } else {
+          this.$q.loading.show();
+
+          this.$api
+            .post('/purchase', {
+              comprar: 0,
+              tamanho: this.tickets.length,
+              nome: this.nome,
+              voos,
+            })
+            .then((response) => {
+              this.searchRoutes(this.placeAt, this.placeFrom);
+              this.$q.notify({
+                message: 'Passagem comprada',
+                color: 'primary',
+              });
+            })
+            .catch((error) => {
+              this.$q.notify({
+                message: 'Não foi possivel realizar compra',
+                color: 'negative',
+              });
+            })
+            .finally(() => {
+              this.$q.loading.hide();
+            });
+        }
       },
     },
   };

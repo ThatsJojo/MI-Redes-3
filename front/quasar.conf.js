@@ -47,8 +47,8 @@ module.exports = configure(function(ctx) {
             vueRouterMode: 'hash', // available values: 'hash', 'history'
             env: {
                 NAME: "Azul",
-                ID: 0,
-                BASE_URL: "http://localhost:8001/"
+                ID: 2,
+                BASE_URL: "https://azul-company.herokuapp.com/"
             },
             // transpile: false,
             // publicPath: '/',
@@ -98,7 +98,7 @@ module.exports = configure(function(ctx) {
             // directives: [],
 
             // Quasar plugins
-            plugins: ['Notify']
+            plugins: ['Notify', 'Loading']
         },
 
         // animations: 'all', // --- includes all animations

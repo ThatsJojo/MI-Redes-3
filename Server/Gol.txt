@@ -1,7 +1,0 @@
-Gol http://127.0.0.1:8003
-Rio_de_Janeiro
-Sao_Paulo 1 320 100
-Brasilia
-Rio_de_Janeiro 2 340 100 Salvador 2 390 100 Maceio 3 400 100
-Salvador
-Maceio 3 200 100
