@@ -49,7 +49,14 @@
           <text
             class="q-mx-sm"
           >Tempo total: {{tickets.reduce((carry, e)=> e.tempoBase + carry, 0)}} Horas</text>
-          <q-input bottom-slots v-model="nome" label="Nome comprador" />
+          <q-input
+            bg-color="white"
+            class="q-pa-md"
+            rounded
+            outlined
+            v-model="nome"
+            label="Nome comprador"
+          />
 
           <q-btn label="Comprar" color="positive" @click="buy"></q-btn>
         </q-toolbar>

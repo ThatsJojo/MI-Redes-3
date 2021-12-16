@@ -48,7 +48,7 @@ module.exports = configure(function(ctx) {
             env: {
                 NAME: "Azul",
                 ID: 2,
-                BASE_URL: "https://azul-company.herokuapp.com/"
+                BASE_URL: "https://tam-company.herokuapp.com/"
             },
             // transpile: false,
             // publicPath: '/',
