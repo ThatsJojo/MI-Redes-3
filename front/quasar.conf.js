@@ -46,8 +46,8 @@ module.exports = configure(function(ctx) {
         build: {
             vueRouterMode: 'hash', // available values: 'hash', 'history'
             env: {
-                NAME: "Azul",
-                ID: 2,
+                NAME: "Tam",
+                ID: 1,
                 BASE_URL: "https://tam-company.herokuapp.com/"
             },
             // transpile: false,
